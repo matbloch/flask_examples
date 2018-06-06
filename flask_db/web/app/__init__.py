@@ -1,8 +1,5 @@
 from flask import Flask
-# application configuration
 from . import config
-
-# database stuff
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
@@ -17,4 +14,11 @@ application.jinja_env.auto_reload = True
 db = SQLAlchemy(application)
 migrate = Migrate(application, db)
 
+# define database models and routing
+from . import routing, models
 
+
+# provide shell custom context
+@application.shell_context_processor
+def make_shell_context():
+    return {'db': db, 'User': models.User}
