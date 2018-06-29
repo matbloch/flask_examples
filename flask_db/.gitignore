@@ -36,3 +36,7 @@ package-lock.json
 
 /build
 node_modules
+
+# Databases
+/web/app/app_dev.db
+/web/app/app_test.db

@@ -9,6 +9,7 @@ class Config(object):
     TESTING = False
     # security token
     SECRET_KEY = os.getenv('SECRET_KEY', 'my_secret_key')
+    SECURITY_PASSWORD_SALT = "loremipsum"
 
 
 class DevelopmentConfig(Config):

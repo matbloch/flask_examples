@@ -14,4 +14,4 @@ EXPOSE 8080
 COPY ./web /web
 WORKDIR /web
 
-CMD ["python", "run_debug.py", "-p 8080"]
+CMD ["python", "run.py", "-p 8080"]

@@ -2,6 +2,10 @@ from flask import Flask, render_template
 from app import application
 
 
+from app.admin import admin as admin_blueprint
+application.register_blueprint(admin_blueprint, url_prefix="/admin")
+
+
 @application.route('/')
 def homepage():
     """
