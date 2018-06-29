@@ -2,7 +2,7 @@
 
 **Configuration**
 - SQLLite
-
+- Flask-Security (Automatic login forms and additional security features)
 
 ## Deployment
 
