@@ -52,6 +52,9 @@ class UserModel(db.Model):
     def __repr__(self):
         return '<models.UserModel[username=%s]>' % self.username
 
+    def remove_role(self, role):
+        self.roles.remove(role)
+
     def add_role(self, role):
         self.roles.append(role)
 

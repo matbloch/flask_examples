@@ -20,9 +20,29 @@
 - Test entries: `UserModel.query.all()`
 
 
-## Endpoints
+## API Endpoints
+
+**Role Management**
+- `GET /roles` get all role
+- `POST /roles` create role
+- `GET /roles/<id:role_id>` get specific role
+- `DELETE /roles/<id:role_id>` delete specific role
+
+**User Management**
+- `GET /users` get all users
+- `POST /users/`
+- `DELETE /users/`
+- `GET /users/<id:user_id>`
+- `DELETE /users/<id:user_id>`
+
+**Role Assignment**
+- `GET /users/<int:user_id>/roles/` get all roles for user
+- `POST /users/<int:user_id>/roles/` add specific role
+- `DELETE /users/<int:user_id>/roles/` DELETE specific role
 
 
-- `/users` manage users
-    - `/users/<int:user_id>/roles` manage role assignment
-- `/roles` manage roles
+**Authentication**
+- `POST /login` Login - get access and refresh tokens
+- `POST /login/refresh` Refresh access token
+- `POST /logout/access` Revoke access token
+- `POST /logout/refresh` Revoke refresh token
