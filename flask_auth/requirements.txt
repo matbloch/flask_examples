@@ -1,0 +1,5 @@
+Flask
+Flask-Restless
+Flask-JWT-Extended
+Flask-Security
+Flask-SQLAlchemy
