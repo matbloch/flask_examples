@@ -18,3 +18,11 @@
 - `db.session.add(guets)`
 - `db.session.commit()`
 - Test entries: `UserModel.query.all()`
+
+
+## Endpoints
+
+
+- `/users` manage users
+    - `/users/<int:user_id>/roles` manage role assignment
+- `/roles` manage roles

@@ -1,6 +1,6 @@
 from flask_restful import Resource, reqparse
 from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
-from app.models import UserModel, RevokedTokenModel
+from app.models import UserModel, RoleModel, RevokedTokenModel
 
 
 # class Protected(Resource):
@@ -12,6 +12,61 @@ from app.models import UserModel, RevokedTokenModel
 #     @roles_required('admin')
 #     def post(self):
 #         return {"msg": "This resource is protected an only accessible for the admin role"}, 201
+
+
+class UserRoles(Resource):
+    def post(self):
+        args = reqparse.RequestParser() \
+            .add_argument("name", type=str, location='json', required=True, help="missing") \
+            .add_argument("description", type=str, location='json', required=False, help="missing") \
+            .parse_args()
+        if RoleModel.find_by_name(args['name']):
+            return {'message': 'Role {} already exists'.format(args['name'])}
+
+        new_role = RoleModel(name=args['name'], description=args['description'])
+
+        try:
+            new_role.save_to_db()
+            return {
+                'message': 'Role {} was created'.format(args['name']),
+            }
+        except:
+            return {'message': 'Something went wrong'}, 500
+
+
+class UserManageRoles(Resource):
+
+    def post(self, user_id, role_id):
+
+        args = reqparse.RequestParser() \
+            .add_argument("name", type=str, location='args', required=True, help="missing") \
+            .add_argument("description", type=str, location='args', required=True, help="missing") \
+            .parse_args()
+
+        the_user = UserModel.find_by_id(user_id)
+
+        if not the_user:
+            return {'message': 'User not found'}, 401
+
+        the_role = RoleModel.find_by_id(role_id)
+        if not the_role:
+            return {'message': 'Role not found'}, 401
+
+        # commit changes to db
+        the_user.add_role(the_role)
+        the_user.save_to_db()
+
+        return {
+            'message': "Role added."
+        }
+
+    def get(self, user_id, **kwargs):
+        the_user = UserModel.find_by_id(user_id)
+
+        if not the_user:
+            return {'message': 'User not found'}, 401
+
+        return {'roles': list(map(lambda x: {'name': x.name}, the_user.roles))}
 
 
 class UserRegistration(Resource):
@@ -40,7 +95,6 @@ class UserRegistration(Resource):
             }
         except:
             return {'message': 'Something went wrong'}, 500
-
 
 
 class UserLogin(Resource):

@@ -12,6 +12,18 @@ class RoleModel(db.Model):
         self.name = name
         self.description = description
 
+    @classmethod
+    def find_by_name(cls, name):
+        return cls.query.filter_by(name=name).first()
+
+    @classmethod
+    def find_by_id(cls, id):
+        return cls.query.filter_by(id=id).first()
+
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
+
 roles_users = db.Table('roles_users',
         db.Column('user_id', db.Integer(), db.ForeignKey('users.id')),
         db.Column('role_id', db.Integer(), db.ForeignKey('roles.id')))
@@ -24,13 +36,14 @@ class UserModel(db.Model):
     password = db.Column(db.String(255), nullable=False)
     active = db.Column(db.Boolean())
     confirmed_at = db.Column(db.DateTime())
-    roles = db.relationship('RoleModel', secondary=roles_users,
-                            backref=db.backref('users', lazy='dynamic'))
     last_login_at = db.Column(db.DateTime())
     current_login_at = db.Column(db.DateTime())
     last_login_ip = db.Column(db.String(255))
     current_login_ip = db.Column(db.String(255))
     login_count = db.Column(db.Integer)
+    # role references
+    roles = db.relationship('RoleModel', secondary=roles_users,
+                            backref=db.backref('users', lazy='dynamic'))
 
     def save_to_db(self):
         db.session.add(self)
@@ -38,6 +51,21 @@ class UserModel(db.Model):
 
     def __repr__(self):
         return '<models.UserModel[username=%s]>' % self.username
+
+    def add_role(self, role):
+        self.roles.append(role)
+
+    def add_roles(self, roles):
+        for role in roles:
+            self.add_role(role)
+
+    def get_roles(self):
+        for role in self.roles:
+            yield role
+
+    @classmethod
+    def find_by_id(cls, id):
+        return cls.query.filter_by(id=id).first()
 
     @classmethod
     def find_by_username(cls, username):
