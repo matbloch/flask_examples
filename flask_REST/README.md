@@ -2,7 +2,9 @@
 
 A minimal boilerplate for Restful APIs.
 
-## Local Installation
+## Setup
+
+### Local
 - Install virtualenv `pip install virtualenv`
 - In project directory, create new python environment `virtualenv .env` that is being stored in ".env" folder
 - Active env: `.env\Scripts\activate`
@@ -10,7 +12,13 @@ A minimal boilerplate for Restful APIs.
 - Install project dependencies: `pip install -r requirements.txt`
 
 
-## Docker
+### Docker
+
+## Database Model
+
+- `class Comment` ORM for Comment Table
+- `class Category` ORM for Category Table
+- `CategorySchema`/`CommentSchema` used for Validation
 
 ## Initialize Database for the first time
 **Option A:** Python Shell
@@ -29,3 +37,6 @@ A minimal boilerplate for Restful APIs.
     - `python db_app/migrate.py db migrate`
 4. Apply the changes to the database
     - `python db_app/migrate.py db upgrade`
+
+**Hint**
+- Each time you update your models, run `migrate` and `upgrade`
