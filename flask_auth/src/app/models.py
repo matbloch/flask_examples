@@ -81,7 +81,6 @@ class UserModel(db.Model):
                 'username': x.username,
                 'password': x.password
             }
-
         return {'users': list(map(lambda x: to_json(x), UserModel.query.all()))}
 
     @classmethod

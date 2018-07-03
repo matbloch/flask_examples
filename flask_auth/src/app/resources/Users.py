@@ -14,7 +14,7 @@ class UserRoleAPI(Resource):
 
     def post(self, user_id):
         args = reqparse.RequestParser() \
-            .add_argument("role_id", type=int, location='args', required=True, help="missing") \
+            .add_argument("role_id", type=int, location='json', required=True, help="missing") \
             .parse_args()
 
         the_user = UserModel.find_by_id(user_id)
@@ -36,7 +36,7 @@ class UserRoleAPI(Resource):
 
     def delete(self, user_id):
         args = reqparse.RequestParser() \
-            .add_argument("role_id", type=int, location='args', required=True, help="missing") \
+            .add_argument("role_id", type=int, location='json', required=True, help="missing") \
             .parse_args()
         the_user = UserModel.find_by_id(user_id)
 
@@ -87,14 +87,14 @@ class UsersAPI(Resource):
 
         try:
             new_user.save_to_db()
-            access_token = create_access_token(identity=args['username'])
-            refresh_token = create_refresh_token(identity=args['username'])
+            access_token = create_access_token(identity=new_user)
+            refresh_token = create_refresh_token(identity=new_user)
             return {
                 'message': 'User {} was created'.format(args['username']),
                 'access_token': access_token,
                 'refresh_token': refresh_token
             }
-        except:
+        except Exception as e:
             return {'message': 'Something went wrong'}, 500
 
     def get(self):
