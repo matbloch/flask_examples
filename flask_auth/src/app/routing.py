@@ -24,5 +24,6 @@ api.add_resource(Auth.UserLogoutAccess, '/logout/access')
 api.add_resource(Auth.UserLogoutRefresh, '/logout/refresh')
 # protected resource
 api.add_resource(Protected.ProtectedResource, '/protected')
+api.add_resource(Protected.ProtectedAdminResource, '/protected/admin')
 # register the blueprint
 application.register_blueprint(api_bp, url_prefix='/api')
