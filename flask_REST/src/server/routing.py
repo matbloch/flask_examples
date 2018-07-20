@@ -4,7 +4,6 @@ from .api import api_bp
 from server import application
 
 
-
 # register the blueprint
 application.register_blueprint(api_bp, url_prefix='/api')
 

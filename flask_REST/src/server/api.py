@@ -8,7 +8,7 @@ from .resources.Category import CategoryResource
 api_bp = Blueprint('api', __name__)
 
 # create routes
-api = Api(api_bp)
+api = Api(api_bp, default_mediatype="application/json")
 api.add_resource(Hello, '/hello')
 
 api.add_resource(CategoryResource, '/category')

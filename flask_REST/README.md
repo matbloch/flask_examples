@@ -31,12 +31,12 @@ A minimal boilerplate for Restful APIs.
 ## Extending the Database Model
 
 1. Create a migration repository (add it to your version control system)
-    - `python app/migrate.py db init`
+    - `python web/migrate.py db init`
 2. Apply some changes to the database models in `app/models.py`
 3. Generate the migration script
-    - `python db_app/migrate.py db migrate`
+    - `python web/migrate.py db migrate`
 4. Apply the changes to the database
-    - `python db_app/migrate.py db upgrade`
+    - `python web/migrate.py db upgrade`
 
 **Hint**
 - Each time you update your models, run `migrate` and `upgrade`

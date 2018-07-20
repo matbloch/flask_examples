@@ -1,7 +1,13 @@
 # Flask Authentication API
 
 
-## Setup
+
+## Client Setup
+
+`npm install`
+`npm start`
+
+## Server Setup
 
 **Create The Database**
 - `python app/migrate.py db init`
@@ -20,7 +26,7 @@
 - Test entries: `UserModel.query.all()`
 
 
-## API Endpoints
+### API Endpoints
 
 **Role Management**
 - `GET /roles` get all role

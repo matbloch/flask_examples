@@ -11,7 +11,7 @@ RUN apt-get update && pip3 install -r /tmp/requirements.txt
 EXPOSE 80
 
 # Add demo app
-COPY ./src /src
+COPY ./server /src
 WORKDIR /src
 
 CMD ["python", "run.py", "-p 80"]
