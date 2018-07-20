@@ -4,12 +4,12 @@ import argparse
 
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser(description='FLASK server')
+    parser = argparse.ArgumentParser(description='FLASK authentication server')
     parser.add_argument(
         '-p', '--port',
         type=int,
-        default=80,
-        help='Port to run app on (default 80)'
+        default=3000,
+        help='Port to run app on (default 3000)'
     )
     args = vars(parser.parse_args())
 

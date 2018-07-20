@@ -35,6 +35,9 @@ module.exports = merge(common, {
       port: process.env.PORT || 8080, // Defaults to 8080
       stats: {
         color: true
+      },
+      proxy: {
+          '/api': 'http://localhost:3000/'
       }
   },
   plugins: [

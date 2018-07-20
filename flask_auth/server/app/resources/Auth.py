@@ -5,6 +5,18 @@ from ..models import UserModel, RoleModel, RevokedTokenModel
 
 class UserLogin(Resource):
     def post(self):
+
+        # test axios
+        # return {
+        #   'data': {},
+        #   'status': 400,
+        #   'statusText': 'OK',
+        #   'headers': {},
+        #   'config': {},
+        #      'request': {}
+        # }, 400
+        #
+
         args = reqparse.RequestParser() \
             .add_argument("username", type=str, location='json', required=True, help="The username") \
             .add_argument("password", type=str, location='json', required=True, help="The password") \
